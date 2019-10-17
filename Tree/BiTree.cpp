@@ -46,26 +46,22 @@ void postOrder(BTNode *bt)
 
 void preOrderNon(BTNode *bt)
 {
-    if(bt != NULL)
+    if (bt!=NULL)
     {
         BTNode *Stack[10];
         int top = -1;
-        BTNode *p = NULL;
+        BTNode *p;
         Stack[++top] = bt;
-        while(top!=-1)
+        while (top!=-1)
         {
             p = Stack[top--];
-            cout << p->data << endl;
-            if(p->rchild != NULL)
-            {
-                Stack[++top] = p->rchild;
-            }
-            if(p->rchild != NULL)
-            {
-                Stack[++top] = p->lchild;
-            }
+            cout << p ->data << endl;
+            if(p->rchild!=NULL)
+                Stack[++p] = p->rchild;
         }
+        
     }
+    
 }
 
 int main()

@@ -9,25 +9,25 @@ using namespace std;
  * 设计算法，使整个顺序表有序
  * 
 **/
-void resort(int a[],int m,int n)
+void insertElem(SqList &a,int m,int n)
 {
     int temp;
     int i,j;
     for (i = m; i < m+n; i++)
     {
-        temp=a[i];
-        for (j = i - 1; j>=0&&temp<a[j]; j--)
-            a[j+1] = a[j];
-        a[j+1] = temp;
+        temp=a.data[i];
+        for (j = i - 1; j>=0&&temp<a.data[j]; j--)
+            a.data[j+1] = a.data[j];
+        a.data[j+1] = temp;
     }   
 }
 
 void test01(){
     SqList A;
-    int a[13] = {1, 3, 5, 7, 8, 9, 11, 12, 2, 4, 6, 8, 10};
-    createSqList(A, a, 13);
+    int a[6] = {3,4,5,2,6,7};
+    createSqList(A, a, 6);
     printSqList((char *)"before-A", A);
-    resort(A.data, 8, 5);
+    insertElem(A, 3, 3);
     printSqList((char*) "after-A", A);
 }
 
@@ -55,10 +55,8 @@ void difference(LNode *A,LNode *B)
             pre->next = p->next;
             free(p);
             p = pre->next;
-        }    
-        
-    }
-       
+        }     
+    }     
 }
 
 void test02(){
@@ -120,7 +118,7 @@ void test04(){
     createSqList(A, a, 8);
     printSqList((char*) "before_A", A);
 
-    delRange(A, 1, 7);
+    delRange(A, 2, 5);
     printSqList((char*) "after_A", A);
 }
 
@@ -142,7 +140,6 @@ void move(SqList &A)
             A.data[i] = A.data[j];
             i++;
         }
-
         // 从左向右 找到第一个比表头元素大的数组下标
         while(i<j && A.data[i]<tmp) i++;
         if(i<j){
@@ -320,10 +317,19 @@ void test09(){
 }
 /**
  * N<=9,int i,A[]求最小值，不能破坏数组
+ * 是否能用j
  * */
 int findMin(int A[],int N)
 {
-
+    int i = A[0];
+    for (int j = 0; j < N; j++)
+    {
+        if(i>A[j])
+        {
+            i = A[j];
+        }
+    }
+    return i;
 }
 
 /**
@@ -331,7 +337,20 @@ int findMin(int A[],int N)
  * */
 void reprint(LNode *L)
 {
+    if(L==NULL)
+    {
+        return;
+    }
+    reprint(L->next);
+    cout << L->data << endl;
+}
 
+void test11(){
+    LNode *A;
+    int a[8] = { 4, 7, 9, 3, 20, 21, 4, 5};
+    createListR(A, a, 8);
+    printLinkedListH((char*) "A", A);
+    reprint(A);
 }
 
 /**
@@ -344,7 +363,7 @@ void findMinMax(int A[], int n, int &max, int &min)
 }
 
 /**
- * 4. 设A＝（a1，…，am）和B＝（b1，…，bn）均为顺序表，A’和B’分别为A和B中除去最大共同
+ * 设A＝（a1，…，am）和B＝（b1，…，bn）均为顺序表，A’和B’分别为A和B中除去最大共同
  *    前缀后的子表（例如，A＝（x，y，y，z，x，z），B＝（x，y，y，z，y，x，x，z），
  *    则两者中最大的共同前缀为（x，y，y，z），在两表中除去最大共同前缀后的子表分别为A’＝（x，z）
  *    和B’＝（y，x，x，z））。若A’＝B’＝空表，则A＝B；若A’＝空表，而B’≠空表，或者两者均不为空，
@@ -358,6 +377,6 @@ char* compare01(char A[], int m, char B[], int n)
 }
 int main()
 {
-    test09();
+    test01();
     return 0;
 }
