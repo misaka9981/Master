@@ -57,12 +57,16 @@ void preOrderNon(BTNode *bt)
             p = Stack[top--];
             cout << p ->data << endl;
             if(p->rchild!=NULL)
-                Stack[++p] = p->rchild;
+                Stack[++top] = p->rchild;
+            if(p->lchild!=NULL)
+                Stack[++top] = p->lchild;
         }
         
     }
     
 }
+
+
 
 int main()
 {
