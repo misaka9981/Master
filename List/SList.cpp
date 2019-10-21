@@ -8,7 +8,7 @@ struct SNode
 };
 
 //头插法
-void createListR(SNode *&L,int a[],int n)
+void createListF(SNode *&L,int a[],int n)
 {
     SNode *newNode;
     L = (SNode *)malloc(sizeof(SNode));
@@ -23,7 +23,7 @@ void createListR(SNode *&L,int a[],int n)
 }
 
 //尾插法
-void createListF(SNode *&L,int a[],int n)
+void createListR(SNode *&L,int a[],int n)
 {
     L = (SNode *)malloc(sizeof(SNode));
     SNode *newNode,*r = L;

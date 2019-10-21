@@ -1,170 +1,70 @@
 #include <iostream>
 using namespace std;
 
-
-struct Node
-{
+typedef struct LNode{
     int data;
-    Node *next;
-};
+    struct LNode *next;
+}LnNde;
 
-Node* createNode(int val)
+LNode* createNode(int value)
 {
-    Node *node = (Node *)malloc(sizeof(Node));
-    node->next = nullptr;
-    node->data = val;
+    LNode *node = (LNode  *)malloc(sizeof(LNode));
+    node->data = value;
+    node->next = NULL;
     return node;
 }
 
-Node* LinkList_search(Node *lst, int val)
+void LinkedList_insertF(LNode *head,int A[],int n)
 {
-    if(lst == NULL)
+    LNode *newNode;
+    for (int i = 0; i < n; i++)
     {
-        return 0;
-    }else if (lst->data == val)
-    {
-        return lst;
-    }else
-    {
-        return LinkList_search(lst->next,val);
+        newNode = (LNode *)malloc(sizeof(LNode));
+        newNode->data=A[i];
+        newNode->next=head->next;
+        head->next=newNode;
+        head->data++;
     }
 }
 
-void LinkList_insertF(Node *lst,int val)
+
+void LinkedList_insertR(LNode *head,int A[],int n)
 {
-    Node *pNode;
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    newNode->data = val;
-    pNode = lst;
-    if(pNode->next == NULL)
+    // LNode *newNode,*r=head;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     newNode = (LNode *)malloc(sizeof(LNode));
+    //     newNode->data=A[i];
+    //     r->next=newNode;
+    //     r=newNode;
+    //     head->data++;
+    // }
+    // r->next=NULL;
+    LNode *newNode;
+    for (int i = 0; i < n; i++)
     {
-        newNode->next = NULL;
-        pNode->next = newNode;
-    }else
-    {
-        Node *tmp = pNode->next;
-        pNode->next = newNode;
-        newNode->next = tmp;
+        newNode = (LNode *)malloc(sizeof(LNode));
+        newNode->data=A[i];
+        head->next=newNode;
+        head=newNode;
+        head->data++;
     }
-    lst->data++;
-}
-
-void LinkList_insertR(Node *lst,int val)
-{
-    Node *pNode;
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    newNode->data = val;
-    pNode = lst;
-    while (pNode->next != NULL)
-    {
-        pNode = pNode->next;
-    }
-    pNode->next = newNode;
-    newNode->next = NULL;
-}
-
-void LinkList_insertByIndex(Node *lst, int val, int index)
-{
-    Node *tmp = lst;
-    for (int i = 1; i <= index;++i)
-    {
-        tmp = tmp->next;
-        if(tmp == NULL){
-            return;
-        }
-    }
-    Node *newNode = createNode(val);
-    newNode->next = tmp->next;
-    tmp->next = newNode;
-    lst->data++;
-}
-
-Node * findNode(Node * head, int loc)
-{
-    Node *tmp = head;
-    for (int i = 0; i <= loc; i++)
-    {
-        tmp = tmp->next;
-        if(tmp == NULL)
-        {
-            return NULL;
-        }
-    }
-    return tmp;
-}
-
-int LinkList_delete(Node *lst, int index)
-{
-    Node *tmp1 = findNode(lst,index);
-    Node *tmp2 = tmp1->next;
-    int res = tmp2->data;
-    tmp1->next = tmp2->next;
-    lst->data--;
-    return res;
-}
-
-void LinkList_push(Node *lst, int val)
-{
-    Node *p;
-    p = (Node *)malloc(sizeof(Node));
-    p->next = NULL;
-    p->data = val;
-    p->next = lst->next;
-    lst->next = p;
-    lst->data++;
-}
-
-int LinkList_pop(Node * lst)
-{
-    Node *tmp = lst->next;
-    int res = tmp->data;
-    lst->next = tmp->next;
-    lst->data--;
-    return res;
-}
-
-void LinkList_enqueue(Node *lst, int val)
-{
-    Node *newNode = createNode(val);
-    Node *tmp = findNode(lst,lst->data-1);
-    newNode->next = tmp->next;
-    tmp->next = newNode;
-    lst->data++;
-}
-
-int LinkList_dequeue(Node *lst)
-{
-
-}
-
-void LinkList_print(Node *lst)
-{
-    Node *tmp;
-    tmp = lst->next;
-    while (tmp)
-    {
-        cout << tmp->data << endl;
-        tmp = tmp->next;
-    }
+    head->next=NULL;
     
 }
 
-void linklist_test(void)
+void insertByIndex(LNode *head,int value,int loc)
 {
-    Node * lst = createNode(0);    //头节点记录链表的长度
-    LinkList_enqueue(lst,1);
-    LinkList_enqueue(lst,2);
-    LinkList_enqueue(lst,3);
-    LinkList_enqueue(lst,4);
-    LinkList_enqueue(lst,5);
-    LinkList_enqueue(lst,6);
-    LinkList_enqueue(lst,7);
-    LinkList_enqueue(lst,8);
-    LinkList_print(lst);
+    LNode *newNode = createNode(value);
+    LNode *tmp;
 }
 
 int main()
 {
-    linklist_test();
+    LNode *head = (LNode *)malloc(sizeof(LNode));
+    head->data = 0;
+    head->next=NULL;
+    int A[13]={1,2,3,4,5,6,7,5,9,7,2,4,6};
+    LinkedList_insertR(head,A,13);
     return 0;
 }
