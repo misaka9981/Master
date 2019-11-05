@@ -129,10 +129,5 @@ void LinkedList_enqueue(LNode *head,int value)
 
 int main()
 {
-    LNode *head = (LNode *)malloc(sizeof(LNode));
-    head->data = 0;
-    head->next=NULL;
-    int A[13]={1,2,3,4,5,6,7,5,9,7,2,4,6};
-    LinkedList_insertR(head,A,13);
-    return 0;
+
 }
