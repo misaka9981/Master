@@ -6,6 +6,12 @@ typedef struct LNode{
     struct LNode *next;
 }LnNde;
 
+int isEmpty(LNode *head)
+{
+    return head->next==NULL;
+}
+
+
 LNode* createNode(int value)
 {
     LNode *node = (LNode  *)malloc(sizeof(LNode));
@@ -40,17 +46,7 @@ void LinkedList_insertR(LNode *head,int A[],int n)
         head->data++;
     }
     r->next=NULL;
-    // LNode *newNode;
-    // for (int i = 0; i < n; i++)
-    // {
-    //     newNode = (LNode *)malloc(sizeof(LNode));
-    //     newNode->data=A[i];
-    //     head->next=newNode;
-    //     head=newNode;
-    //     head->data++;
-    // }
-    // head->next=NULL;
-    
+   
 }
 LNode* findNode(LNode *head,int index)
 {
@@ -99,31 +95,6 @@ int LinkedList_delete(LNode *head,int index)
     }
 }
 
-void LinkedList_push(LNode *head,int value)
-{
-    LNode *newNode = createNode(value);
-    newNode->next = head->next;
-    head->next = newNode;
-    head->data++;
-}
-
-int LinkedList_pop(LNode *head)
-{
-    LNode *tmp = head->next;
-    int res = tmp->data;
-    head->next = tmp->next;
-    free(tmp);
-    head->data--;
-    return res;
-}
-
-void LinkedList_enqueue(LNode *head,int value)
-{
-    LNode *newNode = createNode(value);
-    LNode *tmp = findNode(head,head->data);
-    tmp->next = newNode;
-    head->data++;
-}
 
 
 
