@@ -2,25 +2,47 @@
 #include "../utility/Stack/SqStack.h"
 using namespace std;
 
-typedef struct TreeNode
+struct TreeNode
 {
     int value;
     TreeNode *left;
     TreeNode *right;
-    TreeNode *parent;
 };
+
+TreeNode* makeEmpty(TreeNode *root)
+{
+    if (root!=NULL)
+    {
+        makeEmpty(root->left);
+        makeEmpty(root->right);
+        delete root;
+    }
+    
+    return NULL;
+}
+
+TreeNode* find(int x,TreeNode *root)
+{
+    if(root==NULL)
+        return NULL;
+    if(root->value==x)
+        return root;
+    else if(x<root->value)
+        return find(x,root->left);
+    else
+        return find(x,root->right);
+}
 
 TreeNode* createTreeNode(int value)
 {
     TreeNode *node = (TreeNode*)malloc(sizeof(TreeNode));
     node->left=NULL;
     node->right=NULL;
-    node->parent=NULL;
     node->value=value;
     return node;
 }
 
-
+//中序1
 TreeNode* inOrder_Print1(TreeNode *root)
 {
     if(root!=NULL)
@@ -37,6 +59,7 @@ TreeNode* inOrder_Print1(TreeNode *root)
     }
 }
 
+//中序2
 TreeNode* inOrder_Print2(TreeNode *root)
 {
     int top=-1;
@@ -67,22 +90,21 @@ TreeNode* TreeSearch(TreeNode *root,int value)
 
 }
 
-TreeNode* TreeInsert1(TreeNode *root,int value,TreeNode* parent)
+TreeNode* TreeInsert1(TreeNode *root,int value)
 {
     if(root == NULL)
     {
         root = createTreeNode(value);
-        root->parent = parent;
     }
     else
     {
         if(value < root->value)
         {
-            root->left = TreeInsert1(root->left,value,root);
+            root->left = TreeInsert1(root->left,value);
         }
         if (value >= root->value)
         {
-            root->right = TreeInsert1(root->right,value,root);
+            root->right = TreeInsert1(root->right,value);
         }
     }
     return root;
@@ -110,9 +132,8 @@ TreeNode* TreeInsert2(TreeNode *root,int value)
             {
                 cur = pre->right;
             }
-        }
+        } 
         cur = createTreeNode(value);
-        cur->parent = pre;
         if(value < pre->value)
             pre->left = cur;
         else if(value >= pre->value)
@@ -129,21 +150,15 @@ TreeNode* TreeDelete(TreeNode* root,int value)
 int main()
 {
     TreeNode * BST = NULL;
-    BST = TreeInsert2(BST, 9);
-    BST = TreeInsert2(BST, 5);
-    BST = TreeInsert2(BST, 3);
-    BST = TreeInsert2(BST, 1);
-    BST = TreeInsert2(BST, 7);
-    BST = TreeInsert2(BST, 4);
-    BST = TreeInsert2(BST, 2);
-    BST = TreeInsert2(BST, 11);
-
-
-    
+    BST = TreeInsert1(BST, 9);
+    BST = TreeInsert1(BST, 5);
+    BST = TreeInsert1(BST, 3);
+    BST = TreeInsert1(BST, 1);
+    BST = TreeInsert1(BST, 7);
+    BST = TreeInsert1(BST, 4);
+    BST = TreeInsert1(BST, 2);
+    BST = TreeInsert1(BST, 11);
     inOrder_Print1(BST);
-   
-   
-    
     return 0;
 }
 
