@@ -59,35 +59,101 @@ TreeNode* inOrder_Print1(TreeNode *root)
     }
 }
 
-//中序2
-TreeNode* inOrder_Print2(TreeNode *root)
+//前序1
+TreeNode* preOrder_Print1(TreeNode *root)
+{
+    if(root!=NULL)
+    {
+        cout << root->value << endl;
+        if(root->left!=NULL)
+        {
+            inOrder_Print1(root->left);
+        }
+        if(root->right!=NULL)
+        {
+            inOrder_Print1(root->right);
+        }
+    }
+}
+
+//后序1
+TreeNode* postOrder_Print1(TreeNode *root)
+{
+    if(root!=NULL)
+    {
+        if(root->left!=NULL)
+        {
+            inOrder_Print1(root->left);
+        }
+        if(root->right!=NULL)
+        {
+            inOrder_Print1(root->right);
+        }
+        cout << root->value << endl;
+    }
+}
+
+//前序2
+TreeNode* preOrder_Print2(TreeNode *root)
 {
     int top=-1;
     TreeNode* stack[10];
     stack[++top]=root;
-    TreeNode* tmpNode=root;
-    while (top!=-1 || tmpNode!=NULL)
+    TreeNode* tmpNode=NULL;
+    while (top!=-1)
     {
-        while (tmpNode->left!=NULL)
-        {
-            tmpNode = tmpNode->left;
-            stack[++top]=tmpNode;
-        }
-        tmpNode = stack[--top];
-        cout<<tmpNode->value;
-        if (tmpNode->right!=NULL)
-        {
-           tmpNode = tmpNode->right;
-           stack[++top] = tmpNode; 
-        }
+        tmpNode=stack[top--];
+        cout << tmpNode->value << endl;
+        if(tmpNode->right!=NULL)
+            stack[++top]=tmpNode->right;
+        if(tmpNode->left!=NULL)
+            stack[++top]=tmpNode->left;
     }   
 }
-
+//中序
+TreeNode* inOrder_Print2(TreeNode *root)
+{
+    if(root!=NULL)
+    {
+        TreeNode* stack[10];
+        int top=-1;
+        TreeNode* tmpNode = root;
+        while (top!=-1 || tmpNode!=NULL)
+        {
+            while (tmpNode!=NULL)
+            {
+                stack[++top]=tmpNode;
+                tmpNode=tmpNode->left;
+            }
+            if (top!=-1)
+            {
+                tmpNode=stack[top--];
+                cout << tmpNode->value << endl;
+                tmpNode=tmpNode->right;
+            }
+        }
+        
+    }
+}
 
 
 TreeNode* TreeSearch(TreeNode *root,int value)
 {
-
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    else if (value>root->value)
+    {
+        return TreeSearch(root->right,value);
+    }
+    else if (value<root->value)
+    {
+        return TreeSearch(root->left,value);
+    }
+    else return root;
+    
+    
 }
 
 TreeNode* TreeInsert1(TreeNode *root,int value)
@@ -158,7 +224,7 @@ int main()
     BST = TreeInsert1(BST, 4);
     BST = TreeInsert1(BST, 2);
     BST = TreeInsert1(BST, 11);
-    inOrder_Print1(BST);
+    inOrder_Print2(BST);
     return 0;
 }
 
