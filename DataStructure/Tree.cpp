@@ -224,7 +224,7 @@ int main()
     BST = TreeInsert1(BST, 4);
     BST = TreeInsert1(BST, 2);
     BST = TreeInsert1(BST, 11);
-    inOrder_Print2(BST);
+    preOrder_Print2(BST);
     return 0;
 }
 
