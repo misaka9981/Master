@@ -49,7 +49,6 @@ ArrayGraph* create_graph()
         p2 = get_position(ph, edges[i][1]);
 
         ph->edgeArr[p1][p2] = 1;
-        ph->edgeArr[p2][p1] = 1;
     }
 }
 
