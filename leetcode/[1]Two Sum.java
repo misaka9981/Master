@@ -38,11 +38,4 @@ class Solution {
     }
 }
 
-class Test {
-    public static void main(String[] args) {
-        Solution so = new Solution();
-        int[] nums = {2,7,11,15};
-        System.out.println(so.twoSum(nums, 9)[1]);
-    }
-}
 //leetcode submit region end(Prohibit modification and deletion)

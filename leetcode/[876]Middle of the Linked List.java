@@ -50,9 +50,45 @@ package leetcode;
  *     ListNode(int x) { val = x; }
  * }
  */
-class Solution {
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+}
+
+class Solution876 {
     public ListNode middleNode(ListNode head) {
-        
+        int length = 0;
+        ListNode tmp = head;
+        while (tmp!=null) {
+            length++;
+            tmp = tmp.next;
+        }
+        if(length%2==0) {
+            for (int i = 0; i < ((length/2)+1); i++) {
+                head = head.next;
+            }
+        }else{
+            for (int i = 0; i < length/2; i++) {
+                head = head.next;
+            }
+        }
+        return head;
+    }
+}
+
+class Test876{
+    public static void main(String[] args) {
+        int[] l1 = {1,2,3,4,5};
+        ListNode dummyRoot = new ListNode(0);
+        ListNode ptr = dummyRoot;
+        for(int item : l1) {
+            ptr.next = new ListNode(item);
+            ptr = ptr.next;
+        }
+        Solution876 s2 = new Solution876();
+        s2.middleNode(dummyRoot.next);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
