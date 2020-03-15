@@ -16,34 +16,50 @@ Node * CreateNode(int value)
 
 Node* LinkedListSearchByVal(Node *head,int value)
 {
+    if(head==NULL)
+    {
+        return NULL;
+    }
     while (head->data!=value)
     {
         head = head->next;
     }
     return head;
-    
+   //等同于LinkedListSearchByVal(head->next,value)
 }
 
 Node* LinkedListSearchByIndex(Node* head,int index)
 {
+    Node *tmp=head;
     for (int i = 0; i < index; i++)
     {
-        head = head->next;
+        tmp = tmp->next;
     }
-    return head;
+    return tmp;
     
 }
 
 void LinkedListInsertF(Node* head,int val)
 {
-    Node *tmpNode = (Node *)malloc(sizeof(Node));
-    tmpNode->data=val;
-    tmpNode->next=head->next;
-    head->next = tmpNode;
+    if (head==NULL)
+    {
+        printf("error");
+    }else
+    {
+        Node *tmpNode = (Node *)malloc(sizeof(Node));
+        tmpNode->data=val;
+        tmpNode->next=head->next;
+        head->next = tmpNode;
+    }
 }
 
 void LinkedListInsertR(Node* head,int val)
 {
+    if (head==NULL)
+    {
+        printf("error");
+    }else
+    {
     Node *tmpNode = (Node *)malloc(sizeof(Node));
     tmpNode->data=val;
     Node *s = head;
@@ -51,12 +67,16 @@ void LinkedListInsertR(Node* head,int val)
         s = s->next;
     s->next=tmpNode;
     tmpNode->next=NULL;
-    
-    
+    }
 }
 
 void LinkedListInsertM(Node* head,int val,int index)
 {
+    if (head==NULL)
+    {
+        printf("error");
+    }else
+    {
     for (int i = 0; i < index; i++)
     {
         head = head->next;
@@ -66,6 +86,7 @@ void LinkedListInsertM(Node* head,int val,int index)
     newNode->data = val;
     newNode->next = tmp;
     head->next = newNode;
+    }
 }
 
 Node* LinkedListDeleteF(Node* head)
