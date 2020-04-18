@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 typedef struct Node
 {
     int data;
@@ -117,7 +117,7 @@ Node* LinkedListDeleteByVal(Node* head,int val)
             break;
         head = head->next;
     }
-    Node *pre =head;
+    Node *pre = head;
     Node *cur = head;
     while (cur!=NULL)
     {
@@ -153,13 +153,11 @@ Node* LinkedListDeleteByPos(Node* head,int index)
 int main()
 {
     Node* head = CreateNode(1);
-    LinkedListInsertR(head,2);
-    LinkedListInsertR(head,3);
-    LinkedListInsertR(head,4);
-    LinkedListInsertR(head,5);
-    LinkedListInsertR(head,6);
-    LinkedListInsertM(head,11,3);
-    head = LinkedListDeleteByPos(head,2);
+    LinkedListInsertF(head,2);
+    LinkedListInsertF(head,3);
+    LinkedListInsertF(head,4);
+    LinkedListInsertF(head,5);
+    LinkedListInsertF(head,6);
     //head = LinkedListDeleteByVal(head,3);
     // Node* tmp = LinkedListSearchByVal(head,6);
     // printf("%d",tmp->data);
