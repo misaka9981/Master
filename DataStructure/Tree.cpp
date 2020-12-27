@@ -139,9 +139,9 @@ TreeNode* inOrder_Print2(TreeNode *root)
 
 TreeNode* TreeSearch(TreeNode *root,int value)
 {
-    if(root==NULL)
+    if(root==NULL && root->value == value)
     {
-        return NULL;
+        return root;
     }
     else if (value>root->value)
     {
@@ -151,7 +151,6 @@ TreeNode* TreeSearch(TreeNode *root,int value)
     {
         return TreeSearch(root->left,value);
     }
-    else return root;
     
     
 }
