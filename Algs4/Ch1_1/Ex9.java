@@ -1,4 +1,4 @@
-package CH1;
+package Ch1_1;
 
 public class Ex9{
     public static void main(String[] args) {
@@ -8,5 +8,8 @@ public class Ex9{
             s = (n % 2) +s;
         }
         System.out.println(s);
+        Ex9 e = new Ex9();
+        String a = e.getClass().getResource("/").getPath();    
+        System.out.println(a);
     }
 }
